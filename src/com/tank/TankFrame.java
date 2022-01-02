@@ -32,6 +32,9 @@ public class TankFrame extends Frame {
             int keyCode = e.getKeyCode();
             switch (keyCode) {
                 case KeyEvent.VK_LEFT:
+                    x -= 10;
+                    break;
+                case KeyEvent.VK_RIGHT:
                     x += 10;
                     break;
                 default:
