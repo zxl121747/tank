@@ -1,8 +1,7 @@
 package com.tank;
 
 import java.awt.*;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
+import java.awt.event.*;
 
 public class TankFrame extends Frame {
     private int x = 200;
@@ -19,10 +18,32 @@ public class TankFrame extends Frame {
             }
         });
         this.setVisible(true);
+        this.addKeyListener(new MyKeyListener());
     }
 
     @Override
     public void paint(Graphics g) {
         g.fillRect(x, y, 50, 50);
     }
+
+    class MyKeyListener extends KeyAdapter {
+        @Override
+        public void keyPressed(KeyEvent e) {
+            int keyCode = e.getKeyCode();
+            switch (keyCode) {
+                case KeyEvent.VK_LEFT:
+                    x += 10;
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        @Override
+        public void keyReleased(KeyEvent e) {
+
+        }
+    }
 }
+
+
