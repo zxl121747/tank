@@ -4,11 +4,9 @@ import java.awt.*;
 import java.awt.event.*;
 
 public class TankFrame extends Frame {
-    private int x = 200;
-    private int y = 200;
+
     private int sizex = 800, sizey = 600;
-    private static final int SPEED = 2;
-    private Dir dir = Dir.NULL;
+    Tank myTank = new Tank(100,100,Dir.NULL);
 
     public TankFrame() {
         this.setResizable(false);
@@ -26,25 +24,8 @@ public class TankFrame extends Frame {
 
     @Override
     public void paint(Graphics g) {
-        g.fillRect(x, y, 50, 50);
-        switch (dir) {
-            case UP:
-                y -= SPEED;
-                break;
-            case DOWM:
-                y += SPEED;
-                break;
-            case LEFT:
-                x -= SPEED;
-                break;
-            case RIGHT:
-                x += SPEED;
-                break;
-            default:
-                break;
-        }
+        myTank.paint(g);
     }
-
 
     class MyKeyListener extends KeyAdapter {
         private boolean tl = false;
@@ -96,10 +77,10 @@ public class TankFrame extends Frame {
         }
 
         private void setMainTankDir() {
-            if (tl) dir = Dir.LEFT;
-            if (tr) dir = Dir.RIGHT;
-            if (tu) dir = Dir.UP;
-            if (td) dir = Dir.DOWM;
+            if (tl) myTank.setDir( Dir.LEFT);
+            if (tr) myTank.setDir( Dir.RIGHT);
+            if (tu) myTank.setDir( Dir.UP);
+            if (td) myTank.setDir( Dir.DOWM);
         }
     }
 }
