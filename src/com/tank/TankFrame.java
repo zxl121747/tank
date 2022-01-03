@@ -2,12 +2,15 @@ package com.tank;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class TankFrame extends Frame {
 
-    private int GAME_WIDTH = 800, GAME_HEIGHT = 600;
+    public static final int GAME_WIDTH = 800, GAME_HEIGHT = 600;
     Tank myTank = new Tank(100, 100, Dir.NULL, this);
-    Bullet bullet = new Bullet(300, 300, Dir.DOWN);
+    //Bullet bullet = new Bullet(300, 300, Dir.DOWN);
+    List<Bullet> bullets = new ArrayList<Bullet>();
 
     public TankFrame() {
         this.setResizable(false);
@@ -26,7 +29,9 @@ public class TankFrame extends Frame {
     @Override
     public void paint(Graphics g) {
         myTank.paint(g);
-        bullet.paint(g);
+        for (int i = 0; i < bullets.size(); i++) {
+            bullets.get(i).paint(g);
+        }
     }
 
     Image offScreenImage = null;

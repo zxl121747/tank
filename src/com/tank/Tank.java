@@ -46,7 +46,7 @@ public class Tank {
     }
 
     public void fire() {
-        fm.bullet = new Bullet(x, y, dir);
+        fm.bullets.add(new Bullet(x, y, dir,fm));
     }
 
     public Dir getDir() {

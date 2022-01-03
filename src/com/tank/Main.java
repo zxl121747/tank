@@ -6,6 +6,7 @@ public class Main {
         while (true){
             Thread.sleep(50);
             tankFrame.repaint();
+            //System.out.println(tankFrame.bullets.size());
         }
     }
 }
