@@ -6,7 +6,7 @@ import java.awt.event.*;
 public class TankFrame extends Frame {
 
     private int sizex = 800, sizey = 600;
-    Tank myTank = new Tank(100,100,Dir.NULL);
+    Tank myTank = new Tank(100, 100, Dir.NULL);
 
     public TankFrame() {
         this.setResizable(false);
@@ -32,6 +32,7 @@ public class TankFrame extends Frame {
         private boolean tr = false;
         private boolean tu = false;
         private boolean td = false;
+
         @Override
         public void keyPressed(KeyEvent e) {
             int keyCode = e.getKeyCode();
@@ -77,10 +78,16 @@ public class TankFrame extends Frame {
         }
 
         private void setMainTankDir() {
-            if (tl) myTank.setDir( Dir.LEFT);
-            if (tr) myTank.setDir( Dir.RIGHT);
-            if (tu) myTank.setDir( Dir.UP);
-            if (td) myTank.setDir( Dir.DOWM);
+            if (!tl && !tr && !tu && !td) {
+                myTank.setMoving(false);
+            }else {
+                myTank.setMoving(true);
+            }
+            if (tl) myTank.setDir(Dir.LEFT);
+            if (tr) myTank.setDir(Dir.RIGHT);
+            if (tu) myTank.setDir(Dir.UP);
+            if (td) myTank.setDir(Dir.DOWM);
+
         }
     }
 }
