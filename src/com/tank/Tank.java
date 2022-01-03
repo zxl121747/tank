@@ -3,29 +3,35 @@ package com.tank;
 import java.awt.*;
 
 public class Tank {
-    private int x,y;
-    private static final int SPEED = 2;
+    private int x, y;
+    private static final int SPEED = 5;
     private Dir dir = Dir.NULL;
     private boolean moving;
+    private Bullet bullet;
+    private TankFrame fm;
 
-    public Tank(int x, int y, Dir dir) {
+    public Tank(int x, int y, Dir dir, TankFrame fm) {
         this.x = x;
         this.y = y;
         this.dir = dir;
+        this.fm = fm;
     }
-    public void paint(Graphics g){
+
+    public void paint(Graphics g) {
+        Color c = g.getColor();
+        g.setColor(Color.YELLOW);
         g.fillRect(x, y, 50, 50);
-        if (moving){
-            move();
-        }
+        g.setColor(c);
+        move();
     }
 
     private void move() {
+        if (!moving) return;
         switch (dir) {
             case UP:
                 y -= SPEED;
                 break;
-            case DOWM:
+            case DOWN:
                 y += SPEED;
                 break;
             case LEFT:
@@ -37,6 +43,10 @@ public class Tank {
             default:
                 break;
         }
+    }
+
+    public void fire() {
+        fm.bullet = new Bullet(x, y, dir);
     }
 
     public Dir getDir() {
