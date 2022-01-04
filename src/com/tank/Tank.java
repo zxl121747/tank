@@ -1,6 +1,7 @@
 package com.tank;
 
 import java.awt.*;
+import com.tank.ResourceMgr;
 
 public class Tank {
     private int x, y;
@@ -9,6 +10,8 @@ public class Tank {
     private boolean moving;
     private Bullet bullet;
     private TankFrame fm;
+    public static int WIDTH = ResourceMgr.tankU.getWidth();
+    public static int HEIGHT = ResourceMgr.tankU.getHeight();
 
     public Tank(int x, int y, Dir dir, TankFrame fm) {
         this.x = x;
@@ -18,10 +21,20 @@ public class Tank {
     }
 
     public void paint(Graphics g) {
-        Color c = g.getColor();
-        g.setColor(Color.YELLOW);
-        g.fillRect(x, y, 50, 50);
-        g.setColor(c);
+        switch (dir){
+            case LEFT:
+                g.drawImage(ResourceMgr.tankL,x,y,null);
+                break;
+            case RIGHT:
+                g.drawImage(ResourceMgr.tankR,x,y,null);
+                break;
+            case UP:
+                g.drawImage(ResourceMgr.tankU,x,y,null);
+                break;
+            case DOWN:
+                g.drawImage(ResourceMgr.tankD,x,y,null);
+                break;
+        }
         move();
     }
 
@@ -46,7 +59,9 @@ public class Tank {
     }
 
     public void fire() {
-        fm.bullets.add(new Bullet(x, y, dir,fm));
+        int bX = this.x + Tank.WIDTH/2 - Bullet.WIDTH/2;
+        int bY = this.y + Tank.HEIGHT/2 - Bullet.HEIGHT/2;
+        fm.bullets.add(new Bullet(bX, bY, dir,fm));
     }
 
     public Dir getDir() {
