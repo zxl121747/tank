@@ -4,14 +4,15 @@ import java.awt.*;
 import com.tank.ResourceMgr;
 
 public class Tank {
-    private int x, y;
+    public static int WIDTH = ResourceMgr.tankU.getWidth();
+    public static int HEIGHT = ResourceMgr.tankU.getHeight();
+    public int x, y;
     private static final int SPEED = 5;
     private Dir dir = Dir.NULL;
     private boolean moving;
     private Bullet bullet;
     private TankFrame fm;
-    public static int WIDTH = ResourceMgr.tankU.getWidth();
-    public static int HEIGHT = ResourceMgr.tankU.getHeight();
+    private boolean living = true;
 
     public Tank(int x, int y, Dir dir, TankFrame fm) {
         this.x = x;
@@ -21,6 +22,9 @@ public class Tank {
     }
 
     public void paint(Graphics g) {
+        if (!living){
+            fm.tanks.remove(this);
+        }
         switch (dir){
             case LEFT:
                 g.drawImage(ResourceMgr.tankL,x,y,null);
@@ -78,5 +82,9 @@ public class Tank {
 
     public void setMoving(boolean moving) {
         this.moving = moving;
+    }
+
+    public void die() {
+        this.living = false;
     }
 }
