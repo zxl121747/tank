@@ -6,19 +6,21 @@ import java.awt.*;
  * 子弹
  */
 public class Bullet {
+    public static int WIDTH = ResourceMgr.bulletD.getWidth();
+    public static int HEIGHT = ResourceMgr.bulletD.getHeight();
     private int x, y;
-    private static final int SPEED = 10;
+    private static final int SPEED = 6;
     private Dir dir = Dir.NULL;
     private boolean living = true;
     private TankFrame fm;
-    public static int WIDTH = ResourceMgr.bulletD.getWidth();
-    public static int HEIGHT = ResourceMgr.bulletD.getHeight();
+    Group group = Group.BAD;
 
-    public Bullet(int x, int y, Dir dir, TankFrame fm) {
+    public Bullet(int x, int y, Dir dir, TankFrame fm,Group group) {
         this.x = x;
         this.y = y;
         this.dir = dir;
         this.fm = fm;
+        this.group = group;
     }
 
     public void paint(Graphics g) {
@@ -62,6 +64,7 @@ public class Bullet {
     }
 
     public void collideWith(Tank tank) {
+        if(this.group == tank.group) return;
         Rectangle bulletR = new Rectangle(this.x, this.y ,WIDTH , HEIGHT );
         Rectangle tankR = new Rectangle(tank.x,tank.y , Tank.WIDTH,Tank.HEIGHT);
         if (bulletR.intersects(tankR)){

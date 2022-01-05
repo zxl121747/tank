@@ -1,24 +1,29 @@
 package com.tank;
 
 import java.awt.*;
+import java.util.Random;
+
 import com.tank.ResourceMgr;
 
 public class Tank {
     public static int WIDTH = ResourceMgr.tankU.getWidth();
     public static int HEIGHT = ResourceMgr.tankU.getHeight();
     public int x, y;
-    private static final int SPEED = 5;
+    private static final int SPEED = 2;
     private Dir dir = Dir.NULL;
-    private boolean moving;
+    private boolean moving = true;
     private Bullet bullet;
     private TankFrame fm;
     private boolean living = true;
+    Group group;
+    Random random = new Random();
 
-    public Tank(int x, int y, Dir dir, TankFrame fm) {
+    public Tank(int x, int y, Dir dir, TankFrame fm,Group group) {
         this.x = x;
         this.y = y;
         this.dir = dir;
         this.fm = fm;
+        this.group = group;
     }
 
     public void paint(Graphics g) {
@@ -60,12 +65,16 @@ public class Tank {
             default:
                 break;
         }
+        if (this.group == Group.BAD){
+            if(random.nextInt(10) > 10) this.fire();
+        }
     }
 
     public void fire() {
+        System.out.println(this.group);
         int bX = this.x + Tank.WIDTH/2 - Bullet.WIDTH/2;
         int bY = this.y + Tank.HEIGHT/2 - Bullet.HEIGHT/2;
-        fm.bullets.add(new Bullet(bX, bY, dir,fm));
+        fm.bullets.add(new Bullet(bX, bY, dir,fm,this.group));
     }
 
     public Dir getDir() {
