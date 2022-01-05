@@ -12,6 +12,7 @@ public class TankFrame extends Frame {
     List<Tank> tanks = new ArrayList<>();
     //Bullet bullet = new Bullet(300, 300, Dir.DOWN);
     List<Bullet> bullets = new ArrayList<Bullet>();
+    Explode e = new Explode(100, 100, this);
 
     public TankFrame() {
         this.setResizable(false);
@@ -49,6 +50,7 @@ public class TankFrame extends Frame {
                 bullets.get(i).collideWith(tanks.get(j));
             }
         }
+        e.paint(g);
     }
 
     Image offScreenImage = null;
