@@ -71,11 +71,10 @@ public class Tank {
     }
 
     public void fire() {
-        System.out.println(this.group);
         int bX = this.x + Tank.WIDTH/2 - Bullet.WIDTH/2;
         int bY = this.y + Tank.HEIGHT/2 - Bullet.HEIGHT/2;
         fm.bullets.add(new Bullet(bX, bY, dir,fm,this.group));
-        if(this.group == Group.GOOD) new Thread(()->new Audio("audio/tank_fire.wav").play()).start();
+        //if(this.group == Group.GOOD) new Thread(()->new Audio("audio/tank_fire.wav").play()).start();
     }
 
     public Dir getDir() {

@@ -1,5 +1,7 @@
 package com.tank;
 
+import com.sun.org.apache.bcel.internal.generic.FMUL;
+
 import java.awt.*;
 
 public class Explode {
@@ -14,12 +16,12 @@ public class Explode {
         this.x = x;
         this.y = y;
         this.tf = tf;
-        new Thread(()->new Audio("audio/explode.wav").play()).start();
+        //new Thread(()->new Audio("audio/explode.wav").play()).start();
     }
 
     public void paint(Graphics g) {
         g.drawImage(ResourceMgr.explodes[step++], x, y, null);
         if (step >= ResourceMgr.explodes.length)
-            step = 0;
+            tf.explodes.remove(this);
     }
 }

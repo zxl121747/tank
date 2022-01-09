@@ -12,7 +12,7 @@ public class TankFrame extends Frame {
     List<Tank> tanks = new ArrayList<>();
     //Bullet bullet = new Bullet(300, 300, Dir.DOWN);
     List<Bullet> bullets = new ArrayList<Bullet>();
-    Explode e = new Explode(100, 100, this);
+    List<Explode> explodes = new ArrayList<>();
 
     public TankFrame() {
         this.setResizable(false);
@@ -43,6 +43,9 @@ public class TankFrame extends Frame {
         for (int i = 0; i < tanks.size(); i++) {
             tanks.get(i).paint(g);
         }
+        for (int i = 0; i < explodes.size(); i++) {
+            explodes.get(i).paint(g);
+        }
 
         //碰撞检测
         for (int i = 0; i < bullets.size(); i++) {
@@ -50,7 +53,6 @@ public class TankFrame extends Frame {
                 bullets.get(i).collideWith(tanks.get(j));
             }
         }
-        e.paint(g);
     }
 
     Image offScreenImage = null;

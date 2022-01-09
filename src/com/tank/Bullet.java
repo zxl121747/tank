@@ -70,6 +70,7 @@ public class Bullet {
         if (bulletR.intersects(tankR)){
             this.die();
             tank.die();
+            fm.explodes.add(new Explode(this.x, this.y,fm));
         }
     }
 
