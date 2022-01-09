@@ -8,6 +8,7 @@ import java.awt.*;
 public class Bullet {
     public static int WIDTH = ResourceMgr.bulletD.getWidth();
     public static int HEIGHT = ResourceMgr.bulletD.getHeight();
+    Rectangle rect = new Rectangle();
     private int x, y;
     private static final int SPEED = 6;
     private Dir dir = Dir.UP;
@@ -21,6 +22,10 @@ public class Bullet {
         this.dir = dir;
         this.fm = fm;
         this.group = group;
+        rect.x = this.x;
+        rect.y = this.y;
+        rect.width = WIDTH;
+        rect.height = HEIGHT;
     }
 
     public void paint(Graphics g) {
@@ -60,14 +65,14 @@ public class Bullet {
                 y += SPEED;
                 break;
         }
+        rect.x = this.x;
+        rect.y = this.y;
         if (x < 0 || x > TankFrame.GAME_WIDTH || y < 0 || y > TankFrame.GAME_HEIGHT) living = false;
     }
 
     public void collideWith(Tank tank) {
         if(this.group == tank.group) return;
-        Rectangle bulletR = new Rectangle(this.x, this.y ,WIDTH , HEIGHT );
-        Rectangle tankR = new Rectangle(tank.x,tank.y , Tank.WIDTH,Tank.HEIGHT);
-        if (bulletR.intersects(tankR)){
+        if(rect.intersects(tank.rect)) {
             this.die();
             tank.die();
             int eX = tank.x + Tank.WIDTH/2 - Explode.WIDTH/2;

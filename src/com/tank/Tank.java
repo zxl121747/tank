@@ -8,6 +8,7 @@ import com.tank.ResourceMgr;
 public class Tank {
     public static int WIDTH = ResourceMgr.goodTankU.getWidth();
     public static int HEIGHT = ResourceMgr.goodTankU.getHeight();
+    Rectangle rect = new Rectangle();
     public int x, y;
     private static final int SPEED = 2;
     private Dir dir = Dir.UP;
@@ -24,6 +25,10 @@ public class Tank {
         this.dir = dir;
         this.fm = fm;
         this.group = group;
+        rect.x = this.x;
+        rect.y = this.y;
+        rect.width = WIDTH;
+        rect.height = HEIGHT;
     }
 
     public void paint(Graphics g) {
@@ -71,8 +76,17 @@ public class Tank {
 
         if (this.group == Group.BAD && random.nextInt(100) > 95)
             randomDir();
+        boundsCheck();
+        //update rect
+        rect.x = this.x;
+        rect.y = this.y;
     }
-
+    private void boundsCheck() {
+        if (this.x < 2) x = 2;
+        if (this.y < 28) y = 28;
+        if (this.x > TankFrame.GAME_WIDTH- Tank.WIDTH -2) x = TankFrame.GAME_WIDTH - Tank.WIDTH -2;
+        if (this.y > TankFrame.GAME_HEIGHT - Tank.HEIGHT -2 ) y = TankFrame.GAME_HEIGHT -Tank.HEIGHT -2;
+    }
     private void randomDir() {
         this.dir = Dir.values()[random.nextInt(4)];
     }
