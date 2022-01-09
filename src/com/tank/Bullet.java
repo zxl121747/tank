@@ -10,7 +10,7 @@ public class Bullet {
     public static int HEIGHT = ResourceMgr.bulletD.getHeight();
     private int x, y;
     private static final int SPEED = 6;
-    private Dir dir = Dir.NULL;
+    private Dir dir = Dir.UP;
     private boolean living = true;
     private TankFrame fm;
     Group group = Group.BAD;
@@ -70,7 +70,9 @@ public class Bullet {
         if (bulletR.intersects(tankR)){
             this.die();
             tank.die();
-            fm.explodes.add(new Explode(this.x, this.y,fm));
+            int eX = tank.x + Tank.WIDTH/2 - Explode.WIDTH/2;
+            int eY = tank.y + Tank.HEIGHT/2 - Explode.HEIGHT/2;
+            fm.explodes.add(new Explode(eX, eY, fm));
         }
     }
 
