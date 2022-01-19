@@ -13,14 +13,14 @@ public class Bullet {
     private static final int SPEED = 6;
     private Dir dir = Dir.UP;
     private boolean living = true;
-    private TankFrame fm;
+    GameModel gm = null;
     Group group = Group.BAD;
 
-    public Bullet(int x, int y, Dir dir, TankFrame fm,Group group) {
+    public Bullet(int x, int y, Dir dir, Group group, GameModel fm) {
         this.x = x;
         this.y = y;
         this.dir = dir;
-        this.fm = fm;
+        this.gm = fm;
         this.group = group;
         rect.x = this.x;
         rect.y = this.y;
@@ -30,7 +30,7 @@ public class Bullet {
 
     public void paint(Graphics g) {
         if (!living) {
-            fm.bullets.remove(this);
+            gm.bullets.remove(this);
         }
         switch (dir) {
             case LEFT:
@@ -71,13 +71,13 @@ public class Bullet {
     }
 
     public void collideWith(Tank tank) {
-        if(this.group == tank.group) return;
-        if(rect.intersects(tank.rect)) {
+        if (this.group == tank.group) return;
+        if (rect.intersects(tank.rect)) {
             this.die();
             tank.die();
-            int eX = tank.x + Tank.WIDTH/2 - Explode.WIDTH/2;
-            int eY = tank.y + Tank.HEIGHT/2 - Explode.HEIGHT/2;
-            fm.explodes.add(new Explode(eX, eY, fm));
+            int eX = tank.x + Tank.WIDTH / 2 - Explode.WIDTH / 2;
+            int eY = tank.y + Tank.HEIGHT / 2 - Explode.HEIGHT / 2;
+            gm.explodes.add(new Explode(eX, eY, gm));
         }
     }
 

@@ -14,17 +14,17 @@ public class Tank {
     Dir dir = Dir.UP;
     private boolean moving = true;
     private Bullet bullet;
-    TankFrame fm;
+    GameModel gm;
     private boolean living = true;
     Group group;
     Random random = new Random();
     FireStrategy fs;
 
-    public Tank(int x, int y, Dir dir, TankFrame fm, Group group) {
+    public Tank(int x, int y, Dir dir, Group group, GameModel fm) {
         this.x = x;
         this.y = y;
         this.dir = dir;
-        this.fm = fm;
+        this.gm = fm;
         this.group = group;
         rect.x = this.x;
         rect.y = this.y;
@@ -46,7 +46,7 @@ public class Tank {
 
     public void paint(Graphics g) {
         if (!living) {
-            fm.tanks.remove(this);
+            gm.tanks.remove(this);
         }
         switch (dir) {
             case LEFT:
