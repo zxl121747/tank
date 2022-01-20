@@ -1,4 +1,8 @@
-package com.tank;
+package com.tank.strategy;
+
+import com.tank.Bullet;
+import com.tank.Dir;
+import com.tank.Tank;
 
 public class FourDirFireStrategy implements FireStrategy {
     @Override

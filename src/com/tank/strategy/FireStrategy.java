@@ -1,4 +1,7 @@
-package com.tank;
+package com.tank.strategy;
+
+import com.tank.Bullet;
+import com.tank.Tank;
 
 public interface FireStrategy {
     default void fire(Tank tank) {

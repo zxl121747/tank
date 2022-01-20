@@ -6,9 +6,9 @@ import java.util.List;
 
 public class GameModel {
     Tank myTank = new Tank(200, 400, Dir.DOWN, Group.GOOD, this);
-    List<Tank> tanks = new ArrayList<>();
-    List<Bullet> bullets = new ArrayList<Bullet>();
-    List<Explode> explodes = new ArrayList<>();
+    public List<Tank> tanks = new ArrayList<>();
+    public List<Bullet> bullets = new ArrayList<Bullet>();
+    public List<Explode> explodes = new ArrayList<>();
 
     public GameModel() {
         int initTankCount = Integer.parseInt((String) PropertyMgr.get("initTankCount"));

@@ -4,4 +4,4 @@ tankSpeed=5
 bulletSpeed=10
 gameWidth=1080
 gameHeight=720
-goodFS=com.tank.FourDirFireStrategy
+goodFS=com.tank.strategy.FourDirFireStrategy

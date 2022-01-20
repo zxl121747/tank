@@ -1,22 +1,23 @@
 package com.tank;
 
+import com.tank.strategy.DefaultFireStrategy;
+import com.tank.strategy.FireStrategy;
+
 import java.awt.*;
 import java.util.Random;
 
-import com.tank.ResourceMgr;
 
-public class Tank {
+public class Tank extends GameObject{
     public static int WIDTH = ResourceMgr.goodTankU.getWidth();
     public static int HEIGHT = ResourceMgr.goodTankU.getHeight();
     Rectangle rect = new Rectangle();
-    public int x, y;
     private static final int SPEED = 2;
-    Dir dir = Dir.UP;
+    public Dir dir = Dir.UP;
     private boolean moving = true;
-    private Bullet bullet;
-    GameModel gm;
+    public  Bullet bullet;
+    public GameModel gm;
     private boolean living = true;
-    Group group;
+    public Group group;
     Random random = new Random();
     FireStrategy fs;
 
@@ -43,7 +44,7 @@ public class Tank {
             fs = new DefaultFireStrategy();
         }
     }
-
+    @Override
     public void paint(Graphics g) {
         if (!living) {
             gm.tanks.remove(this);

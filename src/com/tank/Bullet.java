@@ -5,11 +5,10 @@ import java.awt.*;
 /**
  * 子弹
  */
-public class Bullet {
+public class Bullet extends GameObject{
     public static int WIDTH = ResourceMgr.bulletD.getWidth();
     public static int HEIGHT = ResourceMgr.bulletD.getHeight();
     Rectangle rect = new Rectangle();
-    private int x, y;
     private static final int SPEED = 6;
     private Dir dir = Dir.UP;
     private boolean living = true;
@@ -27,7 +26,7 @@ public class Bullet {
         rect.width = WIDTH;
         rect.height = HEIGHT;
     }
-
+    @Override
     public void paint(Graphics g) {
         if (!living) {
             gm.bullets.remove(this);
