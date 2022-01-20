@@ -7,14 +7,14 @@ import java.awt.*;
 import java.util.Random;
 
 
-public class Tank extends GameObject{
+public class Tank extends GameObject {
     public static int WIDTH = ResourceMgr.goodTankU.getWidth();
     public static int HEIGHT = ResourceMgr.goodTankU.getHeight();
-    Rectangle rect = new Rectangle();
+    public Rectangle rect = new Rectangle();
     private static final int SPEED = 2;
     public Dir dir = Dir.UP;
     private boolean moving = true;
-    public  Bullet bullet;
+    public Bullet bullet;
     public GameModel gm;
     private boolean living = true;
     public Group group;
@@ -44,10 +44,11 @@ public class Tank extends GameObject{
             fs = new DefaultFireStrategy();
         }
     }
+
     @Override
     public void paint(Graphics g) {
         if (!living) {
-            gm.tanks.remove(this);
+            gm.gameObjects.remove(this);
         }
         switch (dir) {
             case LEFT:

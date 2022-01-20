@@ -5,7 +5,7 @@ import java.awt.*;
 /**
  * 子弹
  */
-public class Bullet extends GameObject{
+public class Bullet extends GameObject {
     public static int WIDTH = ResourceMgr.bulletD.getWidth();
     public static int HEIGHT = ResourceMgr.bulletD.getHeight();
     Rectangle rect = new Rectangle();
@@ -26,10 +26,11 @@ public class Bullet extends GameObject{
         rect.width = WIDTH;
         rect.height = HEIGHT;
     }
+
     @Override
     public void paint(Graphics g) {
         if (!living) {
-            gm.bullets.remove(this);
+            gm.gameObjects.remove(this);
         }
         switch (dir) {
             case LEFT:
@@ -76,7 +77,7 @@ public class Bullet extends GameObject{
             tank.die();
             int eX = tank.x + Tank.WIDTH / 2 - Explode.WIDTH / 2;
             int eY = tank.y + Tank.HEIGHT / 2 - Explode.HEIGHT / 2;
-            gm.explodes.add(new Explode(eX, eY, gm));
+            gm.gameObjects.add(new Explode(eX, eY, gm));
         }
     }
 
