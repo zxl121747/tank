@@ -20,6 +20,7 @@ public class Tank extends GameObject {
     public Group group;
     Random random = new Random();
     FireStrategy fs;
+    int oldX, oldY;
 
     public Tank(int x, int y, Dir dir, Group group, GameModel fm) {
         this.x = x;
@@ -68,6 +69,8 @@ public class Tank extends GameObject {
     }
 
     private void move() {
+        oldX = x;
+        oldY = y;
         if (!moving) return;
         switch (dir) {
             case UP:
@@ -130,5 +133,10 @@ public class Tank extends GameObject {
 
     public void die() {
         this.living = false;
+    }
+
+    public void back() {
+        x = oldX;
+        y = oldY;
     }
 }
