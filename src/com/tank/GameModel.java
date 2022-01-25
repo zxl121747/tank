@@ -19,6 +19,12 @@ public class GameModel {
         for (int i = 0; i < initTankCount; i++) {
             gameObjects.add(new Tank(50 + i * 80, 200, Dir.DOWN, Group.BAD, this));
         }
+
+        // 初始化墙
+        add(new Wall(150, 150, 200, 50));
+        add(new Wall(550, 150, 200, 50));
+        add(new Wall(300, 300, 50, 200));
+        add(new Wall(550, 300, 50, 200));
     }
 
     public void paint(Graphics g) {
@@ -47,6 +53,9 @@ public class GameModel {
 
     public Tank getMainTank() {
         return myTank;
+    }
+    public void add(GameObject go) {
+        this.gameObjects.add(go);
     }
 
 }

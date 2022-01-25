@@ -8,7 +8,7 @@ import java.awt.*;
 public class Bullet extends GameObject {
     public static int WIDTH = ResourceMgr.bulletD.getWidth();
     public static int HEIGHT = ResourceMgr.bulletD.getHeight();
-    Rectangle rect = new Rectangle();
+    public Rectangle rect = new Rectangle();
     private static final int SPEED = 6;
     private Dir dir = Dir.UP;
     private boolean living = true;
@@ -81,7 +81,7 @@ public class Bullet extends GameObject {
         }
     }
 
-    private void die() {
+    public void die() {
         this.living = false;
     }
 }
