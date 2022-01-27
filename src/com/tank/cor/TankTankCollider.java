@@ -13,7 +13,6 @@ public class TankTankCollider implements Collider{
                 //TODO 先不处理,麻烦
                 t1.back();
                 t2.back();
-                System.out.println("stop");
             }
 
         }

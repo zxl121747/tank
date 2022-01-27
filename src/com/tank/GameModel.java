@@ -1,6 +1,5 @@
 package com.tank;
 
-import com.tank.cor.BulletTankCollider;
 import com.tank.cor.ColliderChain;
 
 import java.awt.*;
@@ -8,24 +7,32 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GameModel {
-    Tank myTank = new Tank(200, 400, Dir.DOWN, Group.GOOD, this);
+    public static final GameModel INSTANCE = new GameModel();
     public List<GameObject> gameObjects = new ArrayList<>();
     ColliderChain colliderChain = new ColliderChain();
+    Tank myTank;
 
-    public GameModel() {
+    static {
+        INSTANCE.init();
+    }
+
+    private void init() {
+        myTank = new Tank(200, 400, Dir.DOWN, Group.GOOD);
         int initTankCount = Integer.parseInt((String) PropertyMgr.get("initTankCount"));
 
         // 初始化敌方坦克
         for (int i = 0; i < initTankCount; i++) {
-            gameObjects.add(new Tank(50 + i * 80, 200, Dir.DOWN, Group.BAD, this));
+            new Tank(50 + i * 80, 200, Dir.DOWN, Group.BAD);
         }
 
         // 初始化墙
-        add(new Wall(150, 150, 200, 50));
-        add(new Wall(550, 150, 200, 50));
-        add(new Wall(300, 300, 50, 200));
-        add(new Wall(550, 300, 50, 200));
+        new Wall(150, 150, 200, 50);
+        new Wall(550, 150, 200, 50);
+        new Wall(300, 300, 50, 200);
+        new Wall(550, 300, 50, 200);
     }
+
+    private GameModel() { }
 
     public void paint(Graphics g) {
         Color c = g.getColor();
@@ -54,8 +61,15 @@ public class GameModel {
     public Tank getMainTank() {
         return myTank;
     }
+
     public void add(GameObject go) {
         this.gameObjects.add(go);
+    }
+    public void remove(GameObject go) {
+        this.gameObjects.remove(go);
+    }
+    public static GameModel getInstance() {
+        return INSTANCE;
     }
 
 }

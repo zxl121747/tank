@@ -13,6 +13,7 @@ public class Wall extends GameObject {
         this.h = h;
 
         this.rect = new Rectangle(x, y, w, h);
+        GameModel.getInstance().add(this);
     }
 
     @Override

@@ -2,6 +2,7 @@ package com.tank.strategy;
 
 import com.tank.Bullet;
 import com.tank.Dir;
+import com.tank.GameModel;
 import com.tank.Tank;
 
 public class FourDirFireStrategy implements FireStrategy {
@@ -12,7 +13,7 @@ public class FourDirFireStrategy implements FireStrategy {
 
         Dir[] dirs = Dir.values();
         for (Dir dir : dirs) {
-            t.gm.gameObjects.add(new Bullet(t.x, t.y, dir, t.group, t.gm));
+            GameModel.getInstance().gameObjects.add(new Bullet(t.x, t.y, dir, t.group));
         }
 
         //if(t.group == Group.GOOD) new Thread(()->new Audio("audio/tank_fire.wav").play()).start();

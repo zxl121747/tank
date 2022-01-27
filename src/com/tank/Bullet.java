@@ -12,25 +12,24 @@ public class Bullet extends GameObject {
     private static final int SPEED = 6;
     private Dir dir = Dir.UP;
     private boolean living = true;
-    GameModel gm = null;
-    Group group = Group.BAD;
+    public Group group = Group.BAD;
 
-    public Bullet(int x, int y, Dir dir, Group group, GameModel fm) {
+    public Bullet(int x, int y, Dir dir, Group group) {
         this.x = x;
         this.y = y;
         this.dir = dir;
-        this.gm = fm;
         this.group = group;
         rect.x = this.x;
         rect.y = this.y;
         rect.width = WIDTH;
         rect.height = HEIGHT;
+        GameModel.getInstance().add(this);
     }
 
     @Override
     public void paint(Graphics g) {
         if (!living) {
-            gm.gameObjects.remove(this);
+            GameModel.getInstance().gameObjects.remove(this);
         }
         switch (dir) {
             case LEFT:
@@ -68,17 +67,6 @@ public class Bullet extends GameObject {
         rect.x = this.x;
         rect.y = this.y;
         if (x < 0 || x > TankFrame.GAME_WIDTH || y < 0 || y > TankFrame.GAME_HEIGHT) living = false;
-    }
-
-    public void collideWith(Tank tank) {
-        if (this.group == tank.group) return;
-        if (rect.intersects(tank.rect)) {
-            this.die();
-            tank.die();
-            int eX = tank.x + Tank.WIDTH / 2 - Explode.WIDTH / 2;
-            int eY = tank.y + Tank.HEIGHT / 2 - Explode.HEIGHT / 2;
-            gm.gameObjects.add(new Explode(eX, eY, gm));
-        }
     }
 
     public void die() {

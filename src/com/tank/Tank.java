@@ -15,18 +15,16 @@ public class Tank extends GameObject {
     public Dir dir = Dir.UP;
     private boolean moving = true;
     public Bullet bullet;
-    public GameModel gm;
-    private boolean living = true;
+    public boolean living = true;
     public Group group;
     Random random = new Random();
     FireStrategy fs;
     int oldX, oldY;
 
-    public Tank(int x, int y, Dir dir, Group group, GameModel fm) {
+    public Tank(int x, int y, Dir dir, Group group) {
         this.x = x;
         this.y = y;
         this.dir = dir;
-        this.gm = fm;
         this.group = group;
         rect.x = this.x;
         rect.y = this.y;
@@ -44,12 +42,13 @@ public class Tank extends GameObject {
         } else {
             fs = new DefaultFireStrategy();
         }
+        GameModel.getInstance().add(this);
     }
 
     @Override
     public void paint(Graphics g) {
         if (!living) {
-            gm.gameObjects.remove(this);
+            GameModel.getInstance().remove(this);
         }
         switch (dir) {
             case LEFT:
