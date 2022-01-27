@@ -4,6 +4,8 @@ import com.tank.Bullet;
 import com.tank.Dir;
 import com.tank.GameModel;
 import com.tank.Tank;
+import com.tank.decorator.RectDecorator;
+import com.tank.decorator.TailDecorator;
 
 public class FourDirFireStrategy implements FireStrategy {
     @Override
@@ -13,7 +15,7 @@ public class FourDirFireStrategy implements FireStrategy {
 
         Dir[] dirs = Dir.values();
         for (Dir dir : dirs) {
-            GameModel.getInstance().gameObjects.add(new Bullet(t.x, t.y, dir, t.group));
+            GameModel.getInstance().gameObjects.add(new RectDecorator(new TailDecorator(new Bullet(t.x, t.y, dir, t.group))));
         }
 
         //if(t.group == Group.GOOD) new Thread(()->new Audio("audio/tank_fire.wav").play()).start();

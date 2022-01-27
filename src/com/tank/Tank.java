@@ -22,6 +22,7 @@ public class Tank extends GameObject {
     int oldX, oldY;
 
     public Tank(int x, int y, Dir dir, Group group) {
+        System.out.println(WIDTH + " " + HEIGHT);
         this.x = x;
         this.y = y;
         this.dir = dir;
@@ -137,5 +138,15 @@ public class Tank extends GameObject {
     public void back() {
         x = oldX;
         y = oldY;
+    }
+
+    @Override
+    public int getWidth() {
+        return WIDTH;
+    }
+
+    @Override
+    public int getHeight() {
+        return HEIGHT;
     }
 }

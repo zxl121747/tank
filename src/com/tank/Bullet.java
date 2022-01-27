@@ -72,4 +72,14 @@ public class Bullet extends GameObject {
     public void die() {
         this.living = false;
     }
+
+    @Override
+    public int getWidth() {
+        return WIDTH;
+    }
+
+    @Override
+    public int getHeight() {
+        return HEIGHT;
+    }
 }
